@@ -1,0 +1,166 @@
+/* Resetting default margin and padding */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Header styling */
+header {
+    background-color: lightslategray;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+}
+
+.logosec {
+    display: flex;
+    align-items: center;
+}
+.logo-img-container {
+    width: 120px; /* Adjust width as needed */
+    height: auto; /* Adjust height as needed */
+    border-radius: 15%; /* Make the container round */
+    overflow: hidden; /* Hide overflow to ensure circular shape */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #333; /* Background color for the circular container */
+}
+
+.logo-img {
+    width: 100%; /* Adjust size of the image inside the container */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.logo img {
+    width: 50px; /* Adjust the width of the logo */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 1;
+    top: 100%;
+    right: 0;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Sidebar styling */
+.sidebar {
+    background-color: lightslategray;
+    color: white;
+    width: 150px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    overflow-y: auto;
+    padding-top: 30px;
+    margin-top: 75px; 
+}
+
+.sidebar nav {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.nav-option {
+    text-align: center;
+    padding: 10px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.nav-option:hover {
+    background-color: #555;
+}
+
+.nav-img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 5px;
+}
+
+.nav h3 {
+    margin: 0;
+    font-size: 14px;
+}
+
+/* Content styling */
+.content {
+    margin-left: 200px; /* Same width as sidebar */
+    padding: 20px;
+}
+
+.main-container {
+    padding: 20px;
+}
+
+.box-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.box {
+    flex-basis: calc(33.33% - 20px); /* Adjust width as needed */
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    margin-top: 0;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    font-size: 35px;
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
