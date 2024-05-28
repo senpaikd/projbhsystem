@@ -1,0 +1,241 @@
+/* Reset default margin and padding */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: lightskyblue;
+}
+
+/* Header styling */
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1;
+}
+
+.logosec {
+    display: flex;
+    align-items: center;
+}
+
+.logo-img-container {
+    width: 70px; /* Adjusted width */
+    height: 70px; /* Adjusted height */
+    overflow: hidden;
+    background-color: white; /* Change to white for better visibility */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+
+.logo-img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* Adjusted position for dropdown arrow */
+.dropdown {
+    position: relative;
+    left: -70px; /* Adjusted position */
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 100px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 1;
+    top: calc(100% + 10px); /* Adjusted top position */
+    left: 0;
+}
+
+.dropdown-content:before {
+    content: '';
+    position: absolute;
+    top: -100px; /* Adjusted top position */
+    left: 50%;
+    transform: translateX(-50%);
+    border: solid;
+    border-color: #f9f9f9 transparent;
+    border-width: 0 8px 8px 8px;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Sidebar styling */
+.sidebar {
+    background-color: #333;
+    color: white;
+    width: 200px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-y: auto;
+    padding-top: 70px; /* Adjusted to match header height */
+}
+
+.sidebar nav {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.nav-option {
+    text-align: center;
+    padding: 10px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.nav-option:hover {
+    background-color: #555;
+}
+
+.nav-img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+}
+
+.nav h3 {
+    margin: 0;
+    font-size: 14px;
+}
+
+/* Content styling */
+.content {
+    margin-left: 200px;
+    padding: 20px;
+    padding-top: 90px; /* Adjusted padding to account for fixed header */
+}
+
+.main-container {
+    padding: 20px;
+}
+
+.box-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.box {
+    flex-basis: calc(33.33% - 20px);
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    margin-top: 0;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    font-size: 24px;
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+.action-form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+}
+
+.action-form label {
+    width: 80px; /* Adjusted width for labels */
+    text-align: right;
+    margin-right: 10px;
+}
+
+.action-form input[type="text"] {
+    width: 150px; /* Adjusted width for text inputs */
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.action-form input[type="submit"] {
+    background-color: #333;
+    color: #fff;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.action-form input[type="submit"]:hover {
+    background-color: #555;
+}
+   
