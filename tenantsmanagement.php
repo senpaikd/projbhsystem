@@ -1,73 +1,16 @@
-<?php
-// Include the database configuration file
-require('config.php');
-session_start();
-
-// Check if the user is logged in
-if (!isset($_SESSION['username'])) {
-    header("Location: login.php");
-    exit();
-}
-
-// Fetch the user's role from the session or database
-$username = $_SESSION['username'];
-$sql = "SELECT role FROM users WHERE username = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("s", $username);
-$stmt->execute();
-$result = $stmt->get_result();
-$user = $result->fetch_assoc();
-$role = $user['role'];
-
-$stmt->close(); // Close the prepared statement
-
-?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boarding House Dashboard</title>
+    <title>Boarding House</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-    /* Additional CSS for action content */
-    .action-form {
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-        align-items: center;
-    }
-
-    .action-form label {
-        width: auto;
-        margin-right: 10px;
-    }
-
-    .action-form input[type="text"],
-    .action-form input[type="submit"] {
-        padding: 5px;
-        border-radius: 5px;
-        border: 1px solid #ccc;
-    }
-
-    .action-form input[type="text"] {
-        width: 100px; /* Adjust width as needed */
-    }
-
-    .action-form input[type="submit"] {
-        background-color: #333;
-        color: #fff;
-        border: none;
-        cursor: pointer;
-    }
-
-    .action-form input[type="submit"]:hover {
-        background-color: #555;
-    }
-</style>
 </head>
+
 <body>
+
     <header>
         <div class="logosec">
             <div class="logo-img-container">
@@ -103,7 +46,62 @@ $stmt->close(); // Close the prepared statement
     <div class="content">
         <div class="main-container">
             <div class="main">
+                <div class="box-container">
+                    <div class="box box1">
+                        <div class="text">
+                            <h2 class="topic-heading">Tenants</h2>
+                            <h2 class="topic"></h2>
+                        </div>
+                    </div>
+                    <div class="box box2">
+                        <div class="text">
+                            <h2 class="topic-heading">Rooms</h2>
+                            <h2 class="topic"></h2>
+                        </div>
+                    </div>
+                    <div class="box box3">
+                        <div class="text">
+                            <h2 class="topic-heading">Beds</h2>
+                            <h2 class="topic"></h2>
+                        </div>
+                    </div>
+                </div>
                 <div class="card">
+                    <h5 class="card-header">Tenants</h5>
+                    <div class="table-responsive text-nowrap">
+                        <table style="width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Room No.</th>
+                                    <th>Bed No.</th>
+                                </tr>
+                            </thead>
+                            <tbody style="text-align: center;">
+                                <?php
+                                include 'config.php';
+
+                                $sql = "SELECT * FROM tenants";
+                                $result = $conn->query($sql);
+
+                                if ($result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) {
+                                        echo "<tr>";
+                                        echo "<td>" . htmlspecialchars($row['name'], ENT_QUOTES, 'UTF-8') . "</td>";
+                                        echo "<td>" . htmlspecialchars($row['room_number'], ENT_QUOTES, 'UTF-8') . "</td>";
+                                        echo "<td>" . htmlspecialchars($row['bed_number'], ENT_QUOTES, 'UTF-8') . "</td>";
+                                        echo "</tr>";
+                                    }
+                                } else {
+                                    echo "<tr><td colspan='3'>No tenants found</td></tr>";
+                                }
+                                $conn->close();
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
                 <?php if ($role == 'admin') { ?>
                 <div class="card">
                     <h5 class="card-header">Manage Applications</h5>
@@ -125,7 +123,7 @@ $stmt->close(); // Close the prepared statement
                             <tbody style="text-align: center;">
                                 <?php
                                 $sql = "SELECT * FROM applications WHERE status='pending'";
-                                $result = $conn->query($sql); // Execute the query
+                                $result = $conn->query($sql);
 
                                 if ($result->num_rows > 0) {
                                     while ($row = $result->fetch_assoc()) {
@@ -140,11 +138,7 @@ $stmt->close(); // Close the prepared statement
                                         echo "<td>" . htmlspecialchars($row['application_date'], ENT_QUOTES, 'UTF-8') . "</td>";
                                         echo "<td>
                                                 <form method='post' action='manage_application.php'>
-                                                    <input type='hidden' name='id' value='" . htmlspecialchars($row['id'], ENT_QUOTES, 'UTF-8') . "'>
-                                                    <label for='room_number'>Room No.:</label>
-                                                    <input type='text' id='room_number' name='room_number' required>
-                                                    <label for='bed_number'>Bed No.:</label>
-                                                    <input type='text' id='bed_number' name='bed_number' required>
+                                                    <input type='hidden' name='application_id' value='" . htmlspecialchars($row['id'], ENT_QUOTES, 'UTF-8') . "'>
                                                     <input type='submit' name='action' value='Accept'>
                                                     <input type='submit' name='action' value='Decline'>
                                                 </form>
@@ -154,7 +148,6 @@ $stmt->close(); // Close the prepared statement
                                 } else {
                                     echo "<tr><td colspan='9'>No pending applications</td></tr>";
                                 }
-                                $conn->close();
                                 ?>
                             </tbody>
                         </table>
@@ -164,5 +157,6 @@ $stmt->close(); // Close the prepared statement
             </div>
         </div>
     </div>
+
 </body>
 </html>

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Room Management</title>
+    <title>Bed Management</title>
     <link rel="stylesheet" href="style.css">
     <style>
         body {
@@ -168,13 +168,15 @@
         </nav>
     </div>
     <div class="card">
-        <h5 class="card-header" style="margin-left: 9%;">Rooms</h5>
+        <h5 class="card-header" style="margin-left: 0%;">Beds</h5>
+        <button onclick="location.href='create_bed.php';" style="margin: 10px;">Add Bed</button>
         <div class="table-responsive text-nowrap">
             <table>
                 <thead>
                     <tr>
+                        <th>Tenant</th>
+                        <th>Bed Number</th>
                         <th>Room Number</th>
-                        <th>Capacity</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -183,51 +185,37 @@
                     <?php
                     include 'config.php';
 
-                    $sql = "SELECT * FROM rooms";
+                    $sql = "SELECT beds.*, rooms.room_number 
+                            FROM beds 
+                            INNER JOIN rooms ON beds.room_id = rooms.id";
                     $result = $conn->query($sql);
 
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
                             echo "<tr>";
+                            echo "<td>" . $row['bed_number'] . "</td>";
                             echo "<td>" . $row['room_number'] . "</td>";
-                            echo "<td>" . $row['capacity'] . "</td>";
                             echo "<td>" . $row['status'] . "</td>";
+                            echo "<td><input type='text' name='tenant_name[]' placeholder='Tenant Name' value='" . $row['tenant_name'] . "'></td>";
                             echo "<td>
-                                    <form method='post' action='edit_room.php'>
-                                        <input type='hidden' name='room_id' value='" . $row['id'] . "'>
+                                    <form method='post' action='edit_bed.php'>
+                                        <input type='hidden' name='bed_id' value='" . $row['id'] . "'>
                                         <button type='submit'>Edit</button>
                                     </form>
-                                    <form method='post' action='delete_room.php' onsubmit='return confirm(\"Are you sure you want to delete this room?\")'>
-                                        <input type='hidden' name='room_id' value='" . $row['id'] . "'>
+                                    <form method='post' action='delete_bed.php' onsubmit='return confirm(\"Are you sure you want to delete this bed?\")'>
+                                        <input type='hidden' name='bed_id' value='" . $row['id'] . "'>
                                         <button type='submit'>Delete</button>
                                     </form>
                                 </td>";
                             echo "</tr>";
                         }
                     } else {
-                        echo "<tr><td colspan='4'>No rooms found</td></tr>";
+                        echo "<tr><td colspan='5'>No beds found</td></tr>";
                     }
                     $conn->close();
                     ?>
                 </tbody>
             </table>
-        </div>
-    </div>
-    <div class="card">
-        <h5 class="card-header" style="margin-left: 9%;">Add Room</h5>
-        <div class="table-responsive text-nowrap">
-            <form method="post" action="create_room.php">
-                <label for="room_number">Room Number:</label>
-                <input type="text" id=" room_number" name="room_number" required>
-                <label for="capacity">Capacity:</label>
-                <input type="number" id="capacity" name="capacity" required>
-                <label for="status">Status:</label>
-                <select id="status" name="status" required>
-                    <option value="Available">Available</option>
-                    <option value="Occupied">Occupied</option>
-                </select>
-                <button type="submit">Add Room</button>
-            </form>
         </div>
     </div>
 </body>
